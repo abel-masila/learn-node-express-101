@@ -1,9 +1,16 @@
 const express = require("express");
 const Joi = require("@hapi/joi");
 
+const logger = require("./logger");
+
 const app = express();
 
 app.use(express.json());
+app.use((req, res, next) => {
+  console.log("Logging...");
+  next();
+});
+app.use(logger);
 
 const courses = [
   { id: 1, name: "NodeJS" },
